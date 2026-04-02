@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use std::process::Command;
 
 fn main() -> Result<()> {
-    let server_dir = PathBuf::from(".pumpkin-server");
+    let server_dir = PathBuf::from(".server");
     let plugins_dir = server_dir.join("plugins");
     std::fs::create_dir_all(&plugins_dir)?;
 
