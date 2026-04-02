@@ -27,7 +27,7 @@ pub fn get_pumpkin() -> Result<PathBuf> {
         .build()?;
 
     let release: Release = client
-        .get("https://api.github.com/repos/Pumpkin-MC/Pumpkin/releases/latest")
+        .get("https://api.github.com/repos/Pumpkin-MC/Pumpkin/releases/tags/nightly")
         .send()?
         .error_for_status()?
         .json()?;
