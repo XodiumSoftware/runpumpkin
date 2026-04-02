@@ -1,23 +1,18 @@
-# PumpkinPlus
+# runpumpkin
 
-PumpkinPlus is a [Pumpkin](https://github.com/Pumpkin-MC/Pumpkin) Minecraft plugin written in Rust that enhances the vanilla gameplay without replacing it. Every feature is modular and toggled via a JSON config file.
+`runpumpkin` is a CLI tool that automates local [Pumpkin](https://github.com/Pumpkin-MC/Pumpkin) plugin development. Run it from your plugin workspace and it will:
 
-## Features at a glance
-
-| Category      | What it adds                                       |
-|---------------|----------------------------------------------------|
-| **Player**    | Custom join, leave, and kick messages              |
-| **Cosmetics** | Custom MOTD, tab list, locator bar personalisation |
+1. Download the latest Pumpkin server binary (cached by version).
+2. Build your plugin as a `wasm32-wasip2` WASM binary.
+3. Copy the built `.wasm` into the server's `plugins/` folder.
+4. Launch the server so you can test immediately.
 
 ## Requirements
 
-- **Pumpkin** server (latest)
-- Plugin compiled for `wasm32-wasip2`
+- Rust toolchain with the `wasm32-wasip2` target installed
+- Internet access on first run (to download Pumpkin)
 
 ## Quick links
 
 - [Getting Started](getting-started.md)
-- [Module reference](modules/index.md)
-- [Commands & Permissions](commands.md)
-- [Configuration](configuration.md)
-- [GitHub](https://github.com/XodiumSoftware/PumpkinPlus)
+- [GitHub](https://github.com/XodiumSoftware/runpumpkin)

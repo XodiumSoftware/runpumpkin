@@ -2,20 +2,43 @@
 
 ## Installation
 
-1. Download the latest `pumpkinplus.wasm` from [GitHub Releases](https://github.com/XodiumSoftware/PumpkinPlus/releases).
-2. Drop it into your Pumpkin server's `plugins/` folder.
-3. Start (or restart) the server.
+Download the latest `runpumpkin` binary from [GitHub Releases](https://github.com/XodiumSoftware/runpumpkin/releases) and place it somewhere on your `PATH`.
 
-On first start, a `config.json` file is created in the plugin's data folder with all defaults. Edit it and restart to apply changes.
-
-## Building from source
+### Building from source
 
 ```bash
-cargo build --release --target wasm32-wasip2
+cargo install --git https://github.com/XodiumSoftware/runpumpkin
 ```
 
-The output is at `target/wasm32-wasip2/release/pumpkinplus.wasm`.
+Or clone and build manually:
 
-## Customizing behaviour
+```bash
+git clone https://github.com/XodiumSoftware/runpumpkin
+cd runpumpkin
+cargo build --release
+# binary is at target/release/runpumpkin
+```
 
-All settings live in `config.json` in the plugin's data folder. See [Configuration](configuration.md) for the full reference and [Module reference](modules/index.md) for per-module fields.
+## Usage
+
+Run `runpumpkin` from the root of your Pumpkin plugin workspace:
+
+```bash
+runpumpkin
+```
+
+This will:
+
+1. Create a `.pumpkin-server/` directory in the current folder.
+2. Download the latest Pumpkin server binary into your OS cache (only on first run or when a new version is released).
+3. Build your plugin with `cargo build --release --target wasm32-wasip2`.
+4. Copy the resulting `.wasm` into `.pumpkin-server/plugins/`.
+5. Start the Pumpkin server.
+
+## Prerequisites
+
+Your plugin workspace must be a valid Cargo project that compiles for `wasm32-wasip2`. Add the target if you haven't already:
+
+```bash
+rustup target add wasm32-wasip2
+```

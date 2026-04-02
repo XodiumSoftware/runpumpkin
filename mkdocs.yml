@@ -1,8 +1,8 @@
-site_name: PumpkinPlus
-site_description: Documentation for the PumpkinPlus Pumpkin Minecraft plugin
-site_url: http://xodiumsoftware.github.io/PumpkinPlus
-repo_name: XodiumSoftware/PumpkinPlus
-repo_url: https://github.com/XodiumSoftware/PumpkinPlus
+site_name: runpumpkin
+site_description: Run a Pumpkin Minecraft server with your plugin for local testing
+site_url: http://xodiumsoftware.github.io/runpumpkin
+repo_name: XodiumSoftware/runpumpkin
+repo_url: https://github.com/XodiumSoftware/runpumpkin
 edit_uri: edit/main/docs/
 
 theme:
@@ -39,11 +39,3 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Modules:
-      - modules/index.md
-      - Locator: modules/locator.md
-      - MOTD: modules/motd.md
-      - Player: modules/player.md
-      - Tablist: modules/tablist.md
-  - Commands & Permissions: commands.md
-  - Configuration: configuration.md
