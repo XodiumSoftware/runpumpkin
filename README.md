@@ -18,6 +18,7 @@
 [![Contributors][contributors_shield_url]][contributors_url]
 [![Issues][issues_shield_url]][issues_url]
 [![Roadmap][roadmap_shield_url]][roadmap_url]
+[![Docs][docs_shield_url]][docs_url]
 </div>
 
 ## Table of Contents
@@ -45,6 +46,10 @@
 [code_of_conduct_url]: https://github.com/XodiumSoftware/runpumpkin?tab=coc-ov-file
 
 [contributing_url]: https://github.com/XodiumSoftware/runpumpkin?tab=contributing-ov-file
+
+[docs_shield_url]: https://img.shields.io/badge/Docs-Click%20Me!-blue.svg?style=for-the-badge
+
+[docs_url]: https://runpumpkin.xodium.org
 
 [contributors_shield_url]: https://img.shields.io/github/contributors/XodiumSoftware/runpumpkin?style=for-the-badge&color=blue
 
