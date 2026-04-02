@@ -38,41 +38,9 @@ jobs:
           cargo fmt --all -- --check
         shell: bash
 
-  build:
-    name: Build
-    needs: [ lint ]
-    runs-on: ubuntu-latest
-    environment:
-      name: "${{ github.ref_name }}"
-    steps:
-      - id: checkout
-        name: Checkout
-        uses: actions/checkout@v6.0.2
-
-      - id: cache_dependencies
-        name: Cache dependencies
-        uses: actions/cache@v5.0.4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
-      - id: setup_rust
-        name: Setup Rust
-        uses: actions-rust-lang/setup-rust-toolchain@d197c158264056996cfba74a9c2d93886346edc3
-        with:
-          toolchain: stable
-
-      - id: build_artifact
-        name: Build Artefact
-        run: cargo build --release --timings
-        shell: bash
-
   nightly_publish:
     name: Nightly Publish
-    needs: [ build ]
+    needs: [ lint ]
     runs-on: ubuntu-latest
     environment:
       name: "${{ github.ref_name }}"
