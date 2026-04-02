@@ -83,7 +83,7 @@ fn asset_matches(name: &str) -> bool {
         _ => false,
     };
     let arch_match = match std::env::consts::ARCH {
-        "x86_64" => name.contains("x86_64") || name.contains("amd64"),
+        "x86_64" => name.contains("x86_64") || name.contains("amd64") || name.contains("x64"),
         "aarch64" => name.contains("aarch64") || name.contains("arm64"),
         _ => false,
     };
