@@ -2,15 +2,13 @@
 
 ## Installation
 
-Download the latest `runpumpkin` binary from [GitHub Releases](https://github.com/XodiumSoftware/runpumpkin/releases) and place it somewhere on your `PATH`.
+```bash
+cargo install runpumpkin
+```
 
 ### Building from source
 
-```bash
-cargo install --git https://github.com/XodiumSoftware/runpumpkin
-```
-
-Or clone and build manually:
+Clone and build manually:
 
 ```bash
 git clone https://github.com/XodiumSoftware/runpumpkin
