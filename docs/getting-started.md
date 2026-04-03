@@ -27,7 +27,7 @@ runpumpkin
 
 This will:
 
-1. Create a `.pumpkin-server/` directory in the current folder.
+1. Create a `.server/` directory in the current folder.
 2. Download the latest Pumpkin server binary into your OS cache (only on first run or when a new version is released).
 3. Build your plugin with `cargo build --release --target wasm32-wasip2`.
 4. Copy the resulting `.wasm` into `.pumpkin-server/plugins/`.

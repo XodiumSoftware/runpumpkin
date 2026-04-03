@@ -5,6 +5,9 @@ edition = "2024"
 description = "Run a Pumpkin Minecraft server with your plugin for local testing"
 license = "AGPL-3.0"
 repository = "https://github.com/XodiumSoftware/runpumpkin"
+keywords = ["minecraft", "pumpkin", "wasm", "plugin", "server"]
+categories = ["command-line-utilities", "development-tools"]
+rust-version = "1.85"
 
 [[bin]]
 name = "runpumpkin"

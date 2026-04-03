@@ -2,6 +2,8 @@ use anyhow::{Context, Result};
 use serde::Deserialize;
 use std::path::PathBuf;
 
+const PUMPKIN_RELEASE_TAG: &str = "nightly";
+
 #[derive(Deserialize)]
 struct Release {
     tag_name: String,
@@ -27,7 +29,9 @@ pub fn get_pumpkin() -> Result<PathBuf> {
         .build()?;
 
     let release: Release = client
-        .get("https://api.github.com/repos/Pumpkin-MC/Pumpkin/releases/tags/nightly")
+        .get(format!(
+            "https://api.github.com/repos/Pumpkin-MC/Pumpkin/releases/tags/{PUMPKIN_RELEASE_TAG}"
+        ))
         .send()?
         .error_for_status()?
         .json()?;
@@ -70,10 +74,15 @@ pub fn get_pumpkin() -> Result<PathBuf> {
     Ok(bin_path)
 }
 
+/// Returns the platform-specific executable suffix (`.exe` on Windows, empty string elsewhere).
 fn exe_suffix() -> &'static str {
     if cfg!(windows) { ".exe" } else { "" }
 }
 
+/// Returns `true` if the release asset `name` matches the current OS and architecture.
+///
+/// Matches are case-insensitive and support common naming conventions
+/// (e.g. `amd64`/`x86_64`/`x64`, `darwin`/`macos`, `.exe` for Windows).
 fn asset_matches(name: &str) -> bool {
     let name = name.to_lowercase();
     let os_match = match std::env::consts::OS {
