@@ -5,6 +5,8 @@ use serde::Deserialize;
 use std::path::PathBuf;
 use std::process::Command;
 
+const WASM_TARGET: &str = "wasm32-wasip2";
+
 #[derive(Deserialize)]
 struct CargoMetadata {
     packages: Vec<CargoPackage>,
@@ -20,13 +22,15 @@ struct CargoPackage {
 fn main() -> Result<()> {
     let server_dir = PathBuf::from(".server");
     let plugins_dir = server_dir.join("plugins");
+
     std::fs::create_dir_all(&plugins_dir)?;
 
     let pumpkin_bin = download::get_pumpkin()?;
 
     println!("Building plugin...");
+
     let status = Command::new("cargo")
-        .args(["build", "--release", "--target", "wasm32-wasip2"])
+        .args(["build", "--release", "--target", WASM_TARGET])
         .status()
         .context("failed to run cargo build")?;
 
@@ -36,6 +40,7 @@ fn main() -> Result<()> {
 
     let wasm = find_wasm().context("could not find built .wasm file")?;
     let dest = plugins_dir.join(wasm.file_name().unwrap());
+
     std::fs::copy(&wasm, &dest)
         .with_context(|| format!("failed to copy {} to plugins/", wasm.display()))?;
 
@@ -48,7 +53,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-/// Locates the compiled `.wasm` file for the current package under `target/wasm32-wasip2/release/`.
+/// Locates the compiled `.wasm` file for the current package under the `WASM_TARGET` release directory.
 ///
 /// Uses `cargo metadata` to derive the package name, then verifies the file exists.
 fn find_wasm() -> Result<PathBuf> {
@@ -56,7 +61,6 @@ fn find_wasm() -> Result<PathBuf> {
         .args(["metadata", "--no-deps", "--format-version", "1"])
         .output()
         .context("failed to run cargo metadata")?;
-
     let metadata: CargoMetadata = serde_json::from_slice(&output.stdout)?;
     let name = metadata
         .packages
@@ -65,8 +69,7 @@ fn find_wasm() -> Result<PathBuf> {
         .context("cargo metadata returned no packages")?
         .name
         .replace('-', "_");
-
-    let wasm = PathBuf::from(format!("target/wasm32-wasip2/release/{name}.wasm"));
+    let wasm = PathBuf::from(format!("target/{WASM_TARGET}/release/{name}.wasm"));
 
     if !wasm.exists() {
         bail!("expected wasm at {}, not found", wasm.display());

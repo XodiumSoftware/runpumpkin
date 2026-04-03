@@ -27,7 +27,6 @@ pub fn get_pumpkin() -> Result<PathBuf> {
     let client = reqwest::blocking::Client::builder()
         .user_agent("cargo-run-pumpkin")
         .build()?;
-
     let release: Release = client
         .get(format!(
             "https://api.github.com/repos/Pumpkin-MC/Pumpkin/releases/tags/{PUMPKIN_RELEASE_TAG}"
@@ -96,5 +95,6 @@ fn asset_matches(name: &str) -> bool {
         "aarch64" => name.contains("aarch64") || name.contains("arm64"),
         _ => false,
     };
+
     os_match && arch_match
 }
